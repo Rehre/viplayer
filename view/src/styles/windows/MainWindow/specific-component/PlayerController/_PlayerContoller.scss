@@ -1,0 +1,21 @@
+.player-controller {
+  .player-controller__big-play-button {
+    border-radius: 100px;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -25px;
+    margin-left: -30px;
+    outline: none;
+    box-shadow: 0px 0.5px 1px black;
+
+    span {
+      position: relative;
+      top: 10px;
+      left: 2px;  
+      font-size: 30px;
+    }
+  }
+}

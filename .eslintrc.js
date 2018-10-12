@@ -6,5 +6,6 @@ module.exports = {
       "react/forbid-prop-types": "warn",
       "jsx-a11y/media-has-caption": "warn",
       "jsx-a11y/click-events-have-key-events": "warn",
+      "react/destructuring-assignment": "warn",
     },
 };

@@ -20,6 +20,9 @@ class WindowController {
       height: 600,
       show: false,
       backgroundColor: 'black',
+      webPreferences: {
+        webSecurity: false,
+      },
     });
 
     this.MainWindow.setMenu(null);

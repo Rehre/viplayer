@@ -8,7 +8,7 @@ class MainWindow extends React.Component {
     super(props);
 
     this.state = {
-      videoFilePath: '/media/aot-eps1.mp4',
+      videoFilePath: 'file:///media/rehre/Data/Animes/[Kusonime] Index BD 480P/Kusonime_-_To_Aru_Majutsu_no_Index_BD_Eps_08.mkv',
     };
 
     this.video = React.createRef();
@@ -19,7 +19,7 @@ class MainWindow extends React.Component {
 
     return (
       <div className="main-window-container">
-        <video id="video" ref={this.video} />
+        <video id="video" ref={this.video} src={videoFilePath} />
         <MainWindowComponent videoref={this.video} videoFilePath={videoFilePath} />
       </div>
     );

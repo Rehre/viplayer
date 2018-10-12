@@ -4,22 +4,25 @@ import PropTypes from 'prop-types';
 import { faFile } from '@fortawesome/free-solid-svg-icons';
 
 import Touchable from '../../../common/Touchable';
+import PlayerController from '../specific-component/PlayerController/container';
 
 const path = window.require('path');
 
 function MainWindowComponent({ videoref, videoFilePath }) {
-  console.log({ videoref });
-
   const title = path.basename(videoFilePath);
 
   return (
     <div className="main-window">
-      <Touchable
-        icon={faFile}
-        className="main-window__file-open-button"
-        onClick={() => alert('open file')}
-      />
-      <span className="main-window__title">{title}</span>
+      <div className="main-window__header">
+        <div className="main-window__transparent-block" />
+        <Touchable
+          icon={faFile}
+          className="main-window__file-open-button"
+          onClick={() => alert('open file')}
+        />
+        <span className="main-window__title">{title}</span>
+      </div>
+      <PlayerController mediaref={videoref} />
     </div>
   );
 }
