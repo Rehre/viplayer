@@ -1,0 +1,14 @@
+.touchable {
+  width: 15px;
+  height: 15px;
+  padding: 10px;
+  text-align: center;
+  color: var(--silver-light);
+  font-size: 18px;
+  background-color: white;
+}
+
+.touchable:hover {
+  color: var(--silver-dark);
+  cursor: pointer;
+}

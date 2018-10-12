@@ -1,3 +1,4 @@
+/* eslint-env browser */
 import React from 'react';
 
 import MainWindowComponent from '../component';
@@ -7,7 +8,7 @@ class MainWindow extends React.Component {
     super(props);
 
     this.state = {
-      videoFilePath: '',
+      videoFilePath: '/media/aot-eps1.mp4',
     };
 
     this.video = React.createRef();
@@ -18,9 +19,7 @@ class MainWindow extends React.Component {
 
     return (
       <div className="main-window-container">
-        <video ref={this.video}>
-          <track kind="captions" />
-        </video>
+        <video id="video" ref={this.video} />
         <MainWindowComponent videoref={this.video} videoFilePath={videoFilePath} />
       </div>
     );

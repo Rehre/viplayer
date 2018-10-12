@@ -1,0 +1,34 @@
+.main-window-container {
+  width: 100vw;
+  height: 100vh;
+  color: white;
+  overflow: hidden;
+
+  #video {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    z-index: -1;
+  }
+
+  .main-window {
+    width: 100%;
+    height: 100%;
+
+    .main-window__title {
+      font-size: 18px;
+      text-align: center;
+      position: relative;
+      top: 9px;
+      left: 20px;
+    }
+    
+    .main-window__file-open-button {
+      position: relative;
+      display: inline-block;
+      top: 10px;
+      left: 10px;
+    }
+  }
+}
