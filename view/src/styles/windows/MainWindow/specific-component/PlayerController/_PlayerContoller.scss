@@ -7,7 +7,7 @@
     top: 50%;
     left: 50%;
     margin-top: -25px;
-    margin-left: -30px;
+    margin-left: -38px;
     outline: none;
     box-shadow: 0px 0.5px 1px black;
 
@@ -16,6 +16,37 @@
       top: 10px;
       left: 2px;  
       font-size: 30px;
+    }
+  }
+
+  .controller {
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    bottom: 0px;
+    background-color: white;
+    
+    .player-controller__play-button, .player-controller__prev-button, .player-controller__next-button  {
+      position: absolute;
+      display: inline-block;
+    }
+
+    .player-controller__play-button, .player-controller__prev-button, .player-controller__next-button {
+      top: 50%;
+      left: 50%;
+      outline: none;
+      margin-top: -18px;
+      margin-left: -18px;
+      width: 15px;
+      height: 15px;
+    }
+
+    .player-controller__prev-button {
+      margin-left: -70px;
+    }
+
+    .player-controller__next-button {
+      margin-left: 30px;
     }
   }
 }
