@@ -8,7 +8,7 @@ gulp.task('run:dev', () => {
   terminal.stdin.on('error', err => console.log(err));
 
   electron.start();
-  gulp.watch(['src/*.js', 'src/controller/*.js'], electron.restart());
+  gulp.watch(['src/*.js', 'src/controller/*.js'], electron.restart);
 });
 
 gulp.task('run:build', () => {

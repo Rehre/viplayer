@@ -13,20 +13,20 @@
     object-fit: fill;
   }
 
-  .main-window {
+  .main-window{
     width: 100%;
     height: 100%;
 
     .main-window__header {
       position: relative;
+      color: white;
       white-space: pre;
-      color: var(--silver-light);
-      box-shadow: 0px 0.5px 1px black;
 
       .main-window__transparent-block {
-        background-color: white;
+        background-color: black;
         width: 100%;
-        height: 100%;
+        height: 1%;
+        box-shadow: 0px 1px 100px 20px black;
         position: absolute;
         z-index: -1;
       }
@@ -39,13 +39,40 @@
       }
       
       .main-window__file-open-button {
+        box-shadow: 0px 0.5px 2px var(--silver-light);
         display: inline-block;
-        border: 0.5px solid var(--orange);
-        border-radius: 1px;
+        border-radius: 100px;
+        font-size: 15px;
         width: 18px;
+        color: var(--orange);
         height: 18px;
         margin: 5px;
+        outline: none;
+      }
+
+      .main-window__file-open-button:hover {
+        color: var(--dark-orange);
       }
     }
   }
+
+  .main-window-hide {
+    filter: opacity(0);
+    animation: fadeOut 0.8s;
+  }
+
+  .main-window-show {
+    filter: opacity(1);
+    animation: fadeIn 0.5s;
+  }
+}
+
+@keyframes fadeOut {
+  0% {filter: opacity(1);}
+  100% {filter: opacity(0);}
+}
+
+@keyframes fadeIn {
+  0% {filter: opacity(0);}
+  100% {filter: opacity(1);}
 }

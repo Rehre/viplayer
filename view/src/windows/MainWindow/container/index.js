@@ -8,7 +8,7 @@ class MainWindow extends React.Component {
     super(props);
 
     this.state = {
-      videoFilePath: 'file:///media/rehre/Data/Animes/[Kusonime] Index BD 480P/Kusonime_-_To_Aru_Majutsu_no_Index_BD_Eps_08.mkv',
+      videoFilePath: 'file:///media/rehre/Data/Animes/SAO_S3_Alicization/02.mkv',
     };
 
     this.video = React.createRef();

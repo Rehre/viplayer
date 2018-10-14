@@ -14,9 +14,27 @@ class PlayerController extends React.Component {
     this.state = {
       canPlay: true,
       isPlayed: false,
+      currentTime: 0,
+      durationLength: 0,
     };
 
     this.togglePlayPause = this.togglePlayPause.bind(this);
+  }
+
+  componentDidMount() {
+    this.eventHandlerForMediaRef();
+  }
+
+  eventHandlerForMediaRef() {
+    const { mediaref } = this.props;
+
+    mediaref.current.addEventListener('loadedmetadata', () => {
+      this.setState({ durationLength: mediaref.current.duration });
+    });
+
+    mediaref.current.addEventListener('timeupdate', () => {
+      this.setState({ currentTime: mediaref.current.currentTime });
+    });
   }
 
   togglePlayPause() {
@@ -34,9 +52,18 @@ class PlayerController extends React.Component {
   }
 
   render() {
+    const {
+      isPlayed,
+      currentTime,
+      durationLength,
+    } = this.state;
+
     return (
       <PlayerControllerComponent
+        isPlayed={isPlayed}
         playFunction={this.togglePlayPause}
+        currentTime={currentTime}
+        durationLength={durationLength}
       />
     );
   }

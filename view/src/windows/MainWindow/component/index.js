@@ -8,28 +8,54 @@ import PlayerController from '../specific-component/PlayerController/container';
 
 const path = window.require('path');
 
-function MainWindowComponent({ videoref, videoFilePath }) {
-  const title = path.basename(videoFilePath);
+class MainWindowComponent extends React.Component {
+  static propTypes = {
+    videoref: PropTypes.object.isRequired,
+    videoFilePath: PropTypes.string.isRequired,
+  };
 
-  return (
-    <div className="main-window">
-      <div className="main-window__header">
-        <div className="main-window__transparent-block" />
-        <Touchable
-          icon={faFile}
-          className="main-window__file-open-button"
-          onClick={() => alert('open file')}
-        />
-        <span className="main-window__title">{title}</span>
+  constructor(props) {
+    super(props);
+
+    this.mainWindow = React.createRef();
+    this.hideFunc = null;
+  }
+
+  componentDidMount() {
+    this.mainWindow.current.addEventListener('mouseenter', () => {
+      clearTimeout(this.hideFunc);
+      this.mainWindow.current.classList.remove('main-window-hide');
+      this.mainWindow.current.classList.add('main-window-show');
+    });
+
+    this.mainWindow.current.addEventListener('mouseleave', () => {
+      this.hideFunc = setTimeout(() => {
+        this.mainWindow.current.classList.remove('main-window-show');
+        this.mainWindow.current.classList.add('main-window-hide');
+      }, 1000);
+    });
+  }
+
+  render() {
+    const { videoFilePath, videoref } = this.props;
+
+    const title = path.basename(videoFilePath);
+
+    return (
+      <div className="main-window main-window-hide" ref={this.mainWindow}>
+        <div className="main-window__header">
+          <div className="main-window__transparent-block" />
+          <Touchable
+            icon={faFile}
+            className="main-window__file-open-button"
+            onClick={() => alert('open file')}
+          />
+          <span className="main-window__title">{title}</span>
+        </div>
+        <PlayerController mediaref={videoref} />
       </div>
-      <PlayerController mediaref={videoref} />
-    </div>
-  );
+    );
+  }
 }
-
-MainWindowComponent.propTypes = {
-  videoref: PropTypes.object.isRequired,
-  videoFilePath: PropTypes.string.isRequired,
-};
 
 export default MainWindowComponent;

@@ -1,4 +1,6 @@
 .player-controller {
+  width: 100%;
+
   .player-controller__big-play-button {
     border-radius: 100px;
     width: 50px;
@@ -6,17 +8,22 @@
     position: absolute;
     top: 50%;
     left: 50%;
+    color: var(--orange);
     margin-top: -25px;
-    margin-left: -38px;
+    margin-left: -37px;
     outline: none;
+    text-align: center;
     box-shadow: 0px 0.5px 1px black;
 
     span {
       position: relative;
       top: 10px;
-      left: 2px;  
       font-size: 30px;
     }
+  }
+
+  .player-controller__big-play-button:hover, .player-controller__play-button:hover {
+    color: var(--dark-orange);
   }
 
   .controller {
@@ -26,27 +33,48 @@
     bottom: 0px;
     background-color: white;
     
-    .player-controller__play-button, .player-controller__prev-button, .player-controller__next-button  {
+    .player-controller__play-button, .player-controller__prev-button, .player-controller__next-button {
       position: absolute;
       display: inline-block;
     }
 
     .player-controller__play-button, .player-controller__prev-button, .player-controller__next-button {
       top: 50%;
-      left: 50%;
+      left: 10px;
       outline: none;
       margin-top: -18px;
-      margin-left: -18px;
+      margin-left: 30px;
       width: 15px;
       height: 15px;
     }
 
+    .player-controller__play-button {
+      box-shadow: 0px 0.5px 2px var(--silver-light);
+      color: var(--orange);
+      border-radius: 100px;
+      font-size: 15px;
+    }
+
     .player-controller__prev-button {
-      margin-left: -70px;
+      margin-left: -10px;
     }
 
     .player-controller__next-button {
-      margin-left: 30px;
+      margin-left: 70px;
+    }
+
+    .player-controller__duration {
+      color: var(--silver-light);
+      right: 10px;
+      top: 50%;
+      margin-top: -8px;
+      font-size: 15px;
+      user-select: none;
+      position: absolute;
+    }
+
+    .player-controller__duration:hover {
+      cursor: default;
     }
   }
 }
