@@ -14,6 +14,7 @@ function PlayerControllerComponent({
   playFunction,
   currentTime,
   durationLength,
+  setCurrentTime,
 }) {
   function getTime() {
     const minutesOfDuration = `${Math.trunc(durationLength / 60)}`;
@@ -53,6 +54,20 @@ function PlayerControllerComponent({
         <span className="player-controller__duration">
           {getTime()}
         </span>
+        <div className="player-controller__input-range">
+          <progress
+            className="player-controller__input-range__progress-bar"
+            value={currentTime}
+            max={`${durationLength}`}
+          />
+          <input
+            type="range"
+            value={currentTime}
+            min="0"
+            max={`${durationLength}`}
+            onChange={ev => setCurrentTime(ev.target.value)}
+          />
+        </div>
       </div>
     </div>
   );
@@ -63,6 +78,7 @@ PlayerControllerComponent.propTypes = {
   playFunction: PropTypes.func.isRequired,
   currentTime: PropTypes.number.isRequired,
   durationLength: PropTypes.number.isRequired,
+  setCurrentTime: PropTypes.func.isRequired,
 };
 
 export default PlayerControllerComponent;

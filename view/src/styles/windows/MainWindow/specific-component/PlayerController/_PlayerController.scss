@@ -76,5 +76,63 @@
     .player-controller__duration:hover {
       cursor: default;
     }
+
+    .player-controller__input-range {
+      width: 100%;
+      height: 20px;
+      position: absolute;
+      left: 0%;
+      top: -2px;
+      margin-top: -10px;
+
+      input {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        outline: none;
+        height: 4px;
+        background-color: transparent;
+      }
+
+      input::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 15px;
+        height: 15px;
+        border-radius: 100px;
+        background-color: var(--orange);
+        border: 3px solid white;
+        outline: none;
+        margin-top: -3px;
+        box-shadow: 0px 0.5px 2px var(--silver-light);
+      }
+
+      input::-webkit-slider-thumb:hover {
+        cursor: pointer;
+        background-color: var(--dark-orange);
+      }
+
+      .player-controller__input-range__progress-bar {
+        width: 100%;
+        outline: none;
+        height: 4px;
+        margin-top: 10px;
+        position: absolute;
+        background-color: #E0E0E0;
+        z-index: -1;
+      }
+
+      .player-controller__input-range__progress-bar::-webkit-progress-bar {
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: #E0E0E0;
+      }
+
+      .player-controller__input-range__progress-bar::-webkit-progress-value {
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: var(--orange);
+      }
+    }
   }
 }
