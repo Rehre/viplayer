@@ -1,6 +1,7 @@
 const { app } = require('electron');
 
 const WindowInstance = require('./controller/windowController');
+require('./controller/ipcController');
 
 const shouldQuit = app.makeSingleInstance(() => {
   const { MainWindow } = WindowInstance;

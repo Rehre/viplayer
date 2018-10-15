@@ -12,6 +12,7 @@ class MainWindowComponent extends React.Component {
   static propTypes = {
     videoref: PropTypes.object.isRequired,
     videoFilePath: PropTypes.string.isRequired,
+    openDialogFunc: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -37,7 +38,11 @@ class MainWindowComponent extends React.Component {
   }
 
   render() {
-    const { videoFilePath, videoref } = this.props;
+    const {
+      videoFilePath,
+      videoref,
+      openDialogFunc,
+    } = this.props;
 
     const title = path.basename(videoFilePath);
 
@@ -48,7 +53,7 @@ class MainWindowComponent extends React.Component {
           <Touchable
             icon={faFile}
             className="main-window__file-open-button"
-            onClick={() => alert('open file')}
+            onClick={openDialogFunc}
           />
           <span className="main-window__title">{title}</span>
         </div>

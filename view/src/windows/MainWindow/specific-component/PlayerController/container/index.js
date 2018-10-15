@@ -27,7 +27,7 @@ class PlayerController extends React.Component {
   }
 
   setCurrentTime(value) {
-    this.setState({ currentTime: value }, () => {
+    this.setState({ currentTime: parseInt(value, 10) }, () => {
       this.props.mediaref.current.currentTime = parseInt(value, 10);
     });
   }
