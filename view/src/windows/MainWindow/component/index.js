@@ -27,12 +27,14 @@ class MainWindowComponent extends React.Component {
       clearTimeout(this.hideFunc);
       this.mainWindow.current.classList.remove('main-window-hide');
       this.mainWindow.current.classList.add('main-window-show');
+      document.getElementById('video').classList.add('video-sub-up');
     });
 
     this.mainWindow.current.addEventListener('mouseleave', () => {
       this.hideFunc = setTimeout(() => {
         this.mainWindow.current.classList.remove('main-window-show');
         this.mainWindow.current.classList.add('main-window-hide');
+        document.getElementById('video').classList.remove('video-sub-up');
       }, 1000);
     });
   }

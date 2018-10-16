@@ -39,7 +39,7 @@ function openFile(properties) {
     return;
   }
 
-  if (path.extname(properties.payload.videoFilePath) === '.mp4') {
+  if (path.extname(properties.payload.videoFilePath) !== '.mkv') {
     properties.payload.videoCaptionPath = '';
     properties.payload.videoFilePath = `file://${properties.payload.videoFilePath}`;
 
@@ -67,7 +67,9 @@ function openFile(properties) {
   let subsRecord = 'WEBVTT';
 
   parser.on('subtitle', (subtitle) => {
-    const { text, duration, time } = subtitle;
+    const { duration, time } = subtitle;
+    let { text } = subtitle;
+    text = text.replace(/\{.*?\}|\\N/g, '');
     const track = trackRecord++;
 
     subsRecord += `\n${track}\n${convertTime(time)} --> ${convertTime(time + duration)}\n${text}\n`;
