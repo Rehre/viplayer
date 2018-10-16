@@ -1,6 +1,5 @@
 const { app } = require('electron');
 const fs = require('fs');
-const srt2vtt = require('srt2vtt');
 const MatroskaSubtitles = require('matroska-subtitles');
 const path = require('path');
 
