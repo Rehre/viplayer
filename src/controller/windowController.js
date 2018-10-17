@@ -25,7 +25,6 @@ class WindowController {
       minHeight: 350,
       minWidth: 445,
       show: false,
-      fullscreenable: true,
       backgroundColor: 'black',
       webPreferences: {
         webSecurity: false,
@@ -41,6 +40,9 @@ class WindowController {
       alwaysOnTop: true,
       backgroundColor: 'white',
       parent: this.MainWindow,
+      webPreferences: {
+        webSecurity: false,
+      },
     });
 
     this.MainWindow.setMenu(null);
