@@ -4,8 +4,11 @@ const MatroskaSubtitles = require('matroska-subtitles');
 const path = require('path');
 
 const sendToWindow = require('./sendToWindow');
+const toggleWindow = require('./toggleWindow');
 
 function openFile(properties) {
+  toggleWindow('LoadingWindow', 'show');
+
   const userDataPath = app.getPath('userData');
   const applicationPath = path.join(userDataPath, 'ViPlayer');
   const cachePath = path.join(applicationPath, 'cache');
@@ -24,7 +27,7 @@ function openFile(properties) {
   }
 
   const subtitleName = path.basename(properties.payload.videoFilePath);
-  const subtitlePath = path.join(subtitlesCachePath, `${subtitleName.substr(0, subtitleName.lastIndexOf('.'))}.vtt`);
+  const subtitlePath = path.join(subtitlesCachePath, `${properties.payload.videoFilePath.substr(0, properties.payload.videoFilePath.lastIndexOf('/')).replace(/\\|\//g, 'r')}${subtitleName.substr(0, subtitleName.lastIndexOf('.'))}.vtt`);
 
   if (fs.existsSync(subtitlePath)) {
     properties.payload.videoCaptionPath = `file://${subtitlePath}`;
@@ -34,6 +37,8 @@ function openFile(properties) {
       payload: properties.payload,
       event: properties.event,
     }, properties.sendToWindow);
+
+    setTimeout(() => toggleWindow('LoadingWindow', 'hide'), 100);
 
     return;
   }
@@ -46,6 +51,8 @@ function openFile(properties) {
       payload: properties.payload,
       event: properties.event,
     }, properties.sendToWindow);
+
+    setTimeout(() => toggleWindow('LoadingWindow', 'hide'), 100);
 
     return;
   }
@@ -63,7 +70,7 @@ function openFile(properties) {
 
   const parser = new MatroskaSubtitles();
   let trackRecord = 1;
-  let subsRecord = 'WEBVTT';
+  let subsRecord = 'WEBVTT\n';
 
   parser.on('subtitle', (subtitle) => {
     const { duration, time } = subtitle;
@@ -84,6 +91,8 @@ function openFile(properties) {
       payload: properties.payload,
       event: properties.event,
     }, properties.sendToWindow);
+
+    setTimeout(() => toggleWindow('LoadingWindow', 'hide'), 100);
   });
 
   fs.createReadStream(properties.payload.videoFilePath).pipe(parser);
