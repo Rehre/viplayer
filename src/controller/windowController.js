@@ -63,6 +63,13 @@ class WindowController {
       this.MainWindow.focus();
     });
 
+    this.LoadingWindow.on('close', (event) => {
+      if (!this.LoadingWindow) return;
+      event.preventDefault();
+
+      this.LoadingWindow.hide();
+    });
+
     if (isDev) {
       // set this according to your setup
       const reactDevTools = '/home/rehre/.config/google-chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/3.4.0_0';

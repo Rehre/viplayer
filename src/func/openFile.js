@@ -7,6 +7,7 @@ const sendToWindow = require('./sendToWindow');
 const toggleWindow = require('./toggleWindow');
 
 function openFile(properties) {
+  sendToWindow({ event: 'stop-playing-for-new-file' }, 'MainWindow');
   toggleWindow('LoadingWindow', 'show');
 
   const userDataPath = app.getPath('userData');

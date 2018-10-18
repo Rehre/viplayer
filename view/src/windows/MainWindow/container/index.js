@@ -11,7 +11,6 @@ class MainWindow extends React.Component {
 
     this.state = {
       videoFilePath: '',
-      videoCaptionPath: '',
     };
 
     this.video = React.createRef();
@@ -24,10 +23,7 @@ class MainWindow extends React.Component {
   handlingEventFromMainProcess() {
     ipcRenderer.on('received-in-main-window', (event, arg) => {
       if (arg.event === 'opened-file') {
-        this.setState({
-          videoFilePath: arg.payload.videoFilePath,
-          videoCaptionPath: arg.payload.videoCaptionPath,
-        });
+        this.setState({ videoFilePath: arg.payload.videoFilePath });
       }
     });
   }
@@ -43,6 +39,7 @@ class MainWindow extends React.Component {
           src={videoFilePath}
         >
           <track
+            id="track"
             label="Captions"
             kind="captions"
             srcLang="subs"

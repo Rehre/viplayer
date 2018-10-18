@@ -1,7 +1,10 @@
+/* eslint-env browser */
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import PlayerControllerComponent from '../component';
+
+const { ipcRenderer } = window.require('electron');
 
 class PlayerController extends React.Component {
   static propTypes = {
@@ -48,6 +51,30 @@ class PlayerController extends React.Component {
         isPlayed: false,
         canPlay: true,
       });
+    });
+
+    ipcRenderer.on('received-in-main-window', (event, arg) => {
+      if (arg.event === 'stop-playing-for-new-file') {
+        // delete the subtitle track
+        const trackElement = document.getElementById('track');
+        trackElement.parentNode.removeChild(trackElement);
+        // only toggle when the video is played
+        if (this.state.isPlayed) this.togglePlayPause();
+      }
+
+      if (arg.event === 'opened-file') {
+        // create new subtitle track element
+        const trackElement = document.createElement('track');
+        const videoElement = document.getElementById('video');
+        trackElement.id = 'track';
+        trackElement.label = 'Captions';
+        trackElement.kind = 'captions';
+        trackElement.srclang = 'subs';
+        trackElement.src = arg.payload.videoCaptionPath;
+        trackElement.default = true;
+
+        videoElement.appendChild(trackElement);
+      }
     });
   }
 
