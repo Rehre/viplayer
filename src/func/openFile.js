@@ -31,6 +31,7 @@ function openFile(properties) {
   const subtitlePath = path.join(subtitlesCachePath, `${properties.payload.videoFilePath.substr(0, properties.payload.videoFilePath.lastIndexOf('/')).replace(/\\|\//g, 'r')}${subtitleName.substr(0, subtitleName.lastIndexOf('.'))}.vtt`);
 
   if (fs.existsSync(subtitlePath)) {
+    sendToWindow({ event: 'debugging', payload: 'subtitlePath' }, 'MainWindow');
     properties.payload.videoCaptionPath = `file://${subtitlePath}`;
     properties.payload.videoFilePath = `file://${properties.payload.videoFilePath}`;
 
@@ -45,6 +46,7 @@ function openFile(properties) {
   }
 
   if (path.extname(properties.payload.videoFilePath) !== '.mkv') {
+    sendToWindow({ event: 'debugging', payload: `${path.extname(properties.payload.videoFilePath)} : ${properties.payload.videoFilePath}` }, 'MainWindow');
     properties.payload.videoCaptionPath = '';
     properties.payload.videoFilePath = `file://${properties.payload.videoFilePath}`;
 
@@ -83,6 +85,7 @@ function openFile(properties) {
   });
 
   parser.on('finish', () => {
+    sendToWindow({ event: 'debugging', payload: 'parser' }, 'MainWindow');
     fs.writeFileSync(subtitlePath, subsRecord);
 
     properties.payload.videoCaptionPath = `file://${subtitlePath}`;

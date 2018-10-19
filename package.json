@@ -1,14 +1,17 @@
 {
   "name": "viplayer",
+  "productname": "ViPlayer",
   "version": "0.0.1",
   "description": "Video Player created with electron and react",
   "homepage": "https://github.com/Rehre",
   "build": {
     "appId": "com.rehre.viplayer",
+    "icon": "./static_resources/app-icon.png",
     "linux": {
       "category": "Video",
       "target": "deb",
-      "maintainer": "Akmal Maulana Azzam"
+      "maintainer": "Akmal Maulana Azzam",
+      "icon": "./static_resources/app-icon.png"
     },
     "directories": {
       "output": "build"

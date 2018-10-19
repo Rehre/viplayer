@@ -82,6 +82,8 @@ class PlayerController extends React.Component {
     const { canPlay, isPlayed } = this.state;
     const { mediaref } = this.props;
 
+    if (!mediaref.current.src) return;
+
     this.setState({ canPlay: !canPlay }, () => {
       if (!this.state.isPlayed) {
         this.setState({ isPlayed: !isPlayed }, () => mediaref.current.play());

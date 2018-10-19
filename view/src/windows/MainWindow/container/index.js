@@ -18,12 +18,19 @@ class MainWindow extends React.Component {
 
   componentDidMount() {
     this.handlingEventFromMainProcess();
+
+    ipcRenderer.send('get-clicked-file');
   }
 
   handlingEventFromMainProcess() {
     ipcRenderer.on('received-in-main-window', (event, arg) => {
       if (arg.event === 'opened-file') {
+        if (this.state.videoFilePath === arg.payload.videoFilePath) return;
+
         this.setState({ videoFilePath: arg.payload.videoFilePath });
+      }
+      if (arg.event === 'debugging') {
+        alert(arg.payload);
       }
     });
   }
