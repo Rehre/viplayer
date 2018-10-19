@@ -9,5 +9,6 @@ module.exports = {
       "react/destructuring-assignment": "warn",
       "no-param-reassign": "warn",
       "no-plusplus": "warn",
+      "import/no-extraneous-dependencies": "warn",
     },
 };

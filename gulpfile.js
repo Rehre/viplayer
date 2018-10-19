@@ -13,6 +13,12 @@ gulp.task('run:dev', () => {
 
 gulp.task('run:build', () => {
   const commandForBuildReact = 'gnome-terminal -x npm run build:react';
+  const commandForBuildElectron = 'gnome-terminal -x npm run build:electron';
   const terminal = exec(commandForBuildReact, { detached: true });
   terminal.stdin.on('error', err => console.log(err));
+  terminal.stdin.on('finish', () => {
+    console.log('building react production: done');
+
+    exec(commandForBuildElectron);
+  });
 });

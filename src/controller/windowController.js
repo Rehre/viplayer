@@ -1,5 +1,4 @@
 const { app, BrowserWindow } = require('electron');
-const isDev = require('electron-is-dev');
 const { client } = require('electron-connect');
 
 class WindowController {
@@ -7,10 +6,10 @@ class WindowController {
     this.MainWindow = null;
     this.LoadingWindow = null;
 
-    this.MainWindowUrl = `file://${__dirname}/../production/index.html`;
-    this.LoadingWindowUrl = `file://${__dirname}/../production/index.html#/loading`;
+    this.MainWindowUrl = `file://${__dirname}/../../../build/view/index.html`;
+    this.LoadingWindowUrl = `file://${__dirname}/../../../build/view/index.html#/loading`;
 
-    if (isDev) {
+    if (process.env.ELECTRON_IS_DEV) {
       this.MainWindowUrl = 'http://localhost:3000/';
       this.LoadingWindowUrl = 'http://localhost:3000#/loading';
     }
@@ -70,7 +69,7 @@ class WindowController {
       this.LoadingWindow.hide();
     });
 
-    if (isDev) {
+    if (process.env.ELECTRON_IS_DEV) {
       // set this according to your setup
       const reactDevTools = '/home/rehre/.config/google-chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/3.4.0_0';
 
