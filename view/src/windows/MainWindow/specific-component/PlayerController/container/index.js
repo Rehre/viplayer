@@ -9,6 +9,7 @@ const { ipcRenderer } = window.require('electron');
 class PlayerController extends React.Component {
   static propTypes = {
     mediaref: PropTypes.object.isRequired,
+    mediaFilePath: PropTypes.string.isRequired,
   };
 
   constructor(props) {
@@ -19,10 +20,12 @@ class PlayerController extends React.Component {
       isPlayed: false,
       currentTime: 0,
       durationLength: 0,
+      isFullscreen: false,
     };
 
     this.setCurrentTime = this.setCurrentTime.bind(this);
     this.togglePlayPause = this.togglePlayPause.bind(this);
+    this.toggleFullscreen = this.toggleFullscreen.bind(this);
   }
 
   componentDidMount() {
@@ -80,9 +83,9 @@ class PlayerController extends React.Component {
 
   togglePlayPause() {
     const { canPlay, isPlayed } = this.state;
-    const { mediaref } = this.props;
+    const { mediaref, mediaFilePath } = this.props;
 
-    if (!mediaref.current.src) return;
+    if (!mediaFilePath) return;
 
     this.setState({ canPlay: !canPlay }, () => {
       if (!this.state.isPlayed) {
@@ -91,6 +94,14 @@ class PlayerController extends React.Component {
       }
 
       this.setState({ isPlayed: !isPlayed }, () => mediaref.current.pause());
+    });
+  }
+
+  toggleFullscreen() {
+    const { isFullscreen } = this.state;
+
+    this.setState({ isFullscreen: !isFullscreen }, () => {
+      ipcRenderer.send('toggle-fullscreen', !isFullscreen);
     });
   }
 
@@ -105,6 +116,7 @@ class PlayerController extends React.Component {
       <PlayerControllerComponent
         isPlayed={isPlayed}
         playFunction={this.togglePlayPause}
+        toggleFullscreen={this.toggleFullscreen}
         currentTime={currentTime}
         durationLength={durationLength}
         setCurrentTime={this.setCurrentTime}

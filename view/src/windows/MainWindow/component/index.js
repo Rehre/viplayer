@@ -23,19 +23,21 @@ class MainWindowComponent extends React.Component {
   }
 
   componentDidMount() {
-    this.mainWindow.current.addEventListener('mouseenter', () => {
+    this.mainWindow.current.addEventListener('mousemove', () => {
       clearTimeout(this.hideFunc);
+      this.mainWindow.current.style.cursor = 'default';
+
       this.mainWindow.current.classList.remove('main-window-hide');
       this.mainWindow.current.classList.add('main-window-show');
-      document.getElementById('video').classList.add('video-sub-up');
-    });
 
-    this.mainWindow.current.addEventListener('mouseleave', () => {
+      document.getElementById('video').classList.add('video-sub-up');
+
       this.hideFunc = setTimeout(() => {
+        this.mainWindow.current.style.cursor = 'none';
         this.mainWindow.current.classList.remove('main-window-show');
         this.mainWindow.current.classList.add('main-window-hide');
         document.getElementById('video').classList.remove('video-sub-up');
-      }, 1000);
+      }, 2000);
     });
   }
 
@@ -59,7 +61,7 @@ class MainWindowComponent extends React.Component {
           />
           <span className="main-window__title">{title}</span>
         </div>
-        <PlayerController mediaref={videoref} />
+        <PlayerController mediaFilePath={videoFilePath} mediaref={videoref} />
       </div>
     );
   }

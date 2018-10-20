@@ -5,6 +5,7 @@ import {
   faPause,
   faAngleDoubleLeft,
   faAngleDoubleRight,
+  faExpand,
 } from '@fortawesome/free-solid-svg-icons';
 
 import Touchable from '../../../../../common/Touchable';
@@ -15,6 +16,7 @@ function PlayerControllerComponent({
   currentTime,
   durationLength,
   setCurrentTime,
+  toggleFullscreen,
 }) {
   function getTime() {
     const minutesOfDuration = `${Math.trunc(durationLength / 60)}`;
@@ -51,6 +53,11 @@ function PlayerControllerComponent({
           className="player-controller__next-button"
           onClick={playFunction}
         />
+        <Touchable
+          icon={faExpand}
+          className="player-controller__fullscreen-button"
+          onClick={toggleFullscreen}
+        />
         <span className="player-controller__duration">
           {getTime()}
         </span>
@@ -79,6 +86,7 @@ PlayerControllerComponent.propTypes = {
   currentTime: PropTypes.number.isRequired,
   durationLength: PropTypes.number.isRequired,
   setCurrentTime: PropTypes.func.isRequired,
+  toggleFullscreen: PropTypes.func.isRequired,
 };
 
 export default PlayerControllerComponent;

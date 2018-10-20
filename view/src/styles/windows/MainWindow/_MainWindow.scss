@@ -66,12 +66,13 @@
     background-color: transparent;
     text-shadow: 0px 1px 5px black;
     font-weight: 600;
+    font-size: 25px;
     position: absolute;
-    bottom: 25px;
+    bottom: 0px;
   }
 
   .video-sub-up::-webkit-media-text-track-container {
-    bottom: 55px!important;
+    bottom: 30px!important;
   }
 
   .main-window-show {
