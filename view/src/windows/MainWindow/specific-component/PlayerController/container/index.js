@@ -120,6 +120,7 @@ class PlayerController extends React.Component {
         currentTime={currentTime}
         durationLength={durationLength}
         setCurrentTime={this.setCurrentTime}
+        mediaFilePath={this.props.mediaFilePath}
       />
     );
   }

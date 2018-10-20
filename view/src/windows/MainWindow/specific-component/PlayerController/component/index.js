@@ -1,3 +1,4 @@
+/* eslint-env browser */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -10,6 +11,8 @@ import {
 
 import Touchable from '../../../../../common/Touchable';
 
+const { ipcRenderer } = window.require('electron');
+
 function PlayerControllerComponent({
   isPlayed,
   playFunction,
@@ -17,6 +20,7 @@ function PlayerControllerComponent({
   durationLength,
   setCurrentTime,
   toggleFullscreen,
+  mediaFilePath,
 }) {
   function getTime() {
     const minutesOfDuration = `${Math.trunc(durationLength / 60)}`;
@@ -41,7 +45,10 @@ function PlayerControllerComponent({
         <Touchable
           icon={faAngleDoubleLeft}
           className="player-controller__prev-button"
-          onClick={playFunction}
+          onClick={() => ipcRenderer.send('get-next-previous-item', {
+            arg: 'previous',
+            mediaFilePath,
+          })}
         />
         <Touchable
           icon={(isPlayed) ? faPause : faPlay}
@@ -51,7 +58,10 @@ function PlayerControllerComponent({
         <Touchable
           icon={faAngleDoubleRight}
           className="player-controller__next-button"
-          onClick={playFunction}
+          onClick={() => ipcRenderer.send('get-next-previous-item', {
+            arg: 'next',
+            mediaFilePath,
+          })}
         />
         <Touchable
           icon={faExpand}
@@ -87,6 +97,7 @@ PlayerControllerComponent.propTypes = {
   durationLength: PropTypes.number.isRequired,
   setCurrentTime: PropTypes.func.isRequired,
   toggleFullscreen: PropTypes.func.isRequired,
+  mediaFilePath: PropTypes.string.isRequired,
 };
 
 export default PlayerControllerComponent;
