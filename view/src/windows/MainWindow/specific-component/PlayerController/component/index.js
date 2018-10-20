@@ -7,6 +7,7 @@ import {
   faAngleDoubleLeft,
   faAngleDoubleRight,
   faExpand,
+  faVolumeUp,
 } from '@fortawesome/free-solid-svg-icons';
 
 import Touchable from '../../../../../common/Touchable';
@@ -21,6 +22,8 @@ function PlayerControllerComponent({
   setCurrentTime,
   toggleFullscreen,
   mediaFilePath,
+  volume,
+  changeVolume,
 }) {
   function getTime() {
     const minutesOfDuration = `${Math.trunc(durationLength / 60)}`;
@@ -68,6 +71,28 @@ function PlayerControllerComponent({
           className="player-controller__fullscreen-button"
           onClick={toggleFullscreen}
         />
+        <div className="player-controller__volume-range">
+          <Touchable
+            icon={faVolumeUp}
+            className="player-controller__volume-button"
+            onClick={() => {
+              if (volume > '0"') changeVolume('0');
+              if (volume === '0') changeVolume('100');
+            }}
+          />
+          <progress
+            className="player-controller__input-range__progress-bar"
+            value={volume}
+            max="100"
+          />
+          <input
+            type="range"
+            value={volume}
+            min="0"
+            max="100"
+            onChange={ev => changeVolume(ev.target.value)}
+          />
+        </div>
         <span className="player-controller__duration">
           {getTime()}
         </span>
@@ -98,6 +123,8 @@ PlayerControllerComponent.propTypes = {
   setCurrentTime: PropTypes.func.isRequired,
   toggleFullscreen: PropTypes.func.isRequired,
   mediaFilePath: PropTypes.string.isRequired,
+  volume: PropTypes.string.isRequired,
+  changeVolume: PropTypes.func.isRequired,
 };
 
 export default PlayerControllerComponent;

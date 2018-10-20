@@ -21,11 +21,13 @@ class PlayerController extends React.Component {
       currentTime: 0,
       durationLength: 0,
       isFullscreen: false,
+      volume: '100',
     };
 
     this.setCurrentTime = this.setCurrentTime.bind(this);
     this.togglePlayPause = this.togglePlayPause.bind(this);
     this.toggleFullscreen = this.toggleFullscreen.bind(this);
+    this.changeVolume = this.changeVolume.bind(this);
   }
 
   componentDidMount() {
@@ -105,11 +107,18 @@ class PlayerController extends React.Component {
     });
   }
 
+  changeVolume(value) {
+    this.setState({ volume: value }, () => {
+      this.props.mediaref.current.volume = value / 100;
+    });
+  }
+
   render() {
     const {
       isPlayed,
       currentTime,
       durationLength,
+      volume,
     } = this.state;
 
     return (
@@ -121,6 +130,8 @@ class PlayerController extends React.Component {
         durationLength={durationLength}
         setCurrentTime={this.setCurrentTime}
         mediaFilePath={this.props.mediaFilePath}
+        volume={volume}
+        changeVolume={this.changeVolume}
       />
     );
   }
