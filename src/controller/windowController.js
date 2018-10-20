@@ -1,4 +1,7 @@
-const { app, BrowserWindow } = require('electron');
+const {
+  app,
+  BrowserWindow,
+} = require('electron');
 const { client } = require('electron-connect');
 
 class WindowController {
