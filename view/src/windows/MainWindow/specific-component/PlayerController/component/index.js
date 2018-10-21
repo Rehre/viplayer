@@ -8,6 +8,8 @@ import {
   faAngleDoubleRight,
   faExpand,
   faVolumeUp,
+  faVolumeDown,
+  faVolumeMute,
 } from '@fortawesome/free-solid-svg-icons';
 
 import Touchable from '../../../../../common/Touchable';
@@ -35,6 +37,13 @@ function PlayerControllerComponent({
     const currentTimeModified = `${'00'.substr(minutesOfCurrentTime.length)}${minutesOfCurrentTime}:${'00'.substr(secondsOfCurrentTime.length)}${secondsOfCurrentTime}`;
 
     return `${currentTimeModified} / ${duration}`;
+  }
+
+  function getVolumeIcon(volumeValue) {
+    if (volumeValue <= 50) return faVolumeDown;
+    if (volumeValue === '0') return faVolumeMute;
+
+    return faVolumeUp;
   }
 
   return (
@@ -73,7 +82,7 @@ function PlayerControllerComponent({
         />
         <div className="player-controller__volume-range">
           <Touchable
-            icon={faVolumeUp}
+            icon={getVolumeIcon(volume)}
             className="player-controller__volume-button"
             onClick={() => {
               if (volume > '0"') changeVolume('0');
