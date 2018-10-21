@@ -40,8 +40,8 @@ function PlayerControllerComponent({
   }
 
   function getVolumeIcon(volumeValue) {
-    if (volumeValue <= 50) return faVolumeDown;
-    if (volumeValue === '0') return faVolumeMute;
+    if (!parseInt(volumeValue, 10)) return faVolumeMute;
+    if (parseInt(volumeValue, 10) <= 50) return faVolumeDown;
 
     return faVolumeUp;
   }

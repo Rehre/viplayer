@@ -152,9 +152,10 @@
 
       .player-controller__volume-button {
         display: inline;
-        position: relative;
-        top: 2px;
+        position: absolute;
+        top: 50%;
         margin-right: 5px;
+        margin-top: -18px;
         outline: none;
       }
 
@@ -162,6 +163,11 @@
         background-color: transparent;
         position: absolute;
         top: 10px;
+        left: 45px;
+      }
+
+      .player-controller__input-range__progress-bar {
+        left: 45px;
       }
     }
   }
