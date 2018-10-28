@@ -60,6 +60,7 @@ class PlayerController extends React.Component {
 
     ipcRenderer.on('received-in-main-window', (event, arg) => {
       if (arg.event === 'stop-playing-for-new-file') {
+        if (arg.payload.videoFilePath === this.props.mediaFilePath) return;
         // delete the subtitle track
         const trackElement = document.getElementById('track');
         trackElement.parentNode.removeChild(trackElement);
@@ -68,6 +69,7 @@ class PlayerController extends React.Component {
       }
 
       if (arg.event === 'opened-file') {
+        if (arg.payload.videoFilePath === this.props.mediaFilePath) return;
         // create new subtitle track element
         const trackElement = document.createElement('track');
         const videoElement = document.getElementById('video');

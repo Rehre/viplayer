@@ -1,15 +1,19 @@
 {
   "name": "viplayer",
   "productname": "ViPlayer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Video Player created with electron and react",
-  "homepage": "https://github.com/Rehre",
+  "homepage": "https://github.com/Rehre/viplayer",
   "build": {
     "appId": "com.rehre.viplayer",
     "linux": {
       "category": "Video",
       "target": "deb",
       "maintainer": "Akmal Maulana Azzam"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "./build/icons/icon.ico"
     },
     "directories": {
       "output": "build"
@@ -30,10 +34,10 @@
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
-    "build:react": "webpack",
+    "build:react": "cross-env NODE_ENV=production webpack",
     "build:electron": "electron-builder",
-    "dev:react": "webpack-dev-server --config webpack.config.dev.js",
-    "dev:electron": "ELECTRON_IS_DEV=1 electron ."
+    "dev:react": "cross-env NODE_ENV=development webpack-dev-server",
+    "dev:electron": "cross-env NODE_ENV=development electron ."
   },
   "keywords": [
     "Video",
@@ -51,9 +55,10 @@
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
+    "cross-env": "^5.2.0",
     "css-loader": "^1.0.0",
-    "electron-builder": "^20.28.4",
     "electron": "^2.0.11",
+    "electron-builder": "^20.28.4",
     "eslint": "^5.6.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
@@ -67,22 +72,22 @@
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
+    "tree-kill": "^1.2.0",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",
+    "webpack-config-utils": "^2.3.1",
     "webpack-dev-server": "^3.1.9"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.6",
     "@fortawesome/free-solid-svg-icons": "^5.4.1",
     "@fortawesome/react-fontawesome": "^0.1.3",
-    "electron-connect": "^0.6.3",
     "electron-is-dev": "^1.0.1",
     "matroska-subtitles": "^2.0.3",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-router-dom": "^4.3.1",
-    "srt2vtt": "^1.3.1"
+    "react-router-dom": "^4.3.1"
   }
 }

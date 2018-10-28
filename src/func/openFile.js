@@ -8,7 +8,9 @@ const toggleWindow = require('./toggleWindow');
 
 function openFile(properties) {
   sendToWindow({
-    payload: {},
+    payload: {
+      videoFIlePath: `file://${properties.payload.videoFilePath}`,
+    },
     event: 'stop-playing-for-new-file',
   }, properties.sendToWindow);
   toggleWindow('LoadingWindow', 'show');
