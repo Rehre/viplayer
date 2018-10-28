@@ -22,13 +22,17 @@ gulp.task('run:dev', () => {
 });
 
 gulp.task('run:build', () => {
-  const commandForBuildReact = 'npm run build:react';
-  const commandForBuildElectron = 'npm run build:electron';
-  const terminal = exec(commandForBuildReact);
-  terminal.stdin.on('error', err => console.log(err));
-  terminal.stdin.on('finish', () => {
-    console.log('building react production: done');
+  const buildReact = spawn('npm', ['run', 'build:react']);
+  buildReact.stdout.on('data', data => console.log(data.toString()));
 
-    exec(commandForBuildElectron);
+  buildReact.stdin.on('finish', () => {
+    console.log('Finished build React');
+
+    const buildElectron = spawn('npm', ['run', 'build:electron']);
+    buildElectron.on('data', data => console.log(data.toString()));
+
+    buildElectron.stdin.on('finish', () => {
+      console.log('Finished build Electron');
+    });
   });
 });
